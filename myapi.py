@@ -3,6 +3,9 @@ from read import CreatAPI
 from ContextManager import ContextManager
 app = FastAPI()
 
+@app.get('/')
+def index():
+    return {"Witaj": "Na mojej strinie!! :)"}
 
 @app.get('/{city}')
 def home(city: str):
