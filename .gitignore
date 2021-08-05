@@ -4,6 +4,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 venv
+.idea/misc.xml
+.idea/powietrze.iml
 # C extensions
 *.so
 
