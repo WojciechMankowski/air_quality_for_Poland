@@ -1,0 +1,29 @@
+{
+    "0": {
+        "729": {
+            "Og\u00f3lna jako\u015b\u0107 powietrza": "Brak indeksu",
+            "SO2": "Bardzo dobry",
+            "NO2": "Bardzo dobry",
+            "pm10": null,
+            "O3": null
+        }
+    },
+    "1": {
+        "731": {
+            "Og\u00f3lna jako\u015b\u0107 powietrza": "Brak indeksu",
+            "SO2": "Bardzo dobry",
+            "NO2": "Bardzo dobry",
+            "pm10": "Bardzo dobry",
+            "O3": null
+        }
+    },
+    "2": {
+        "736": {
+            "Og\u00f3lna jako\u015b\u0107 powietrza": null,
+            "SO2": null,
+            "NO2": null,
+            "pm10": null,
+            "O3": null
+        }
+    }
+}
