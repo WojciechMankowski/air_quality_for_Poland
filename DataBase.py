@@ -1,9 +1,10 @@
 import sqlite3
 from os import listdir
-from requests import get
+from requests import get, __version__
 from measurementstations import MeasurementStations
 class DataBase:
     def __init__(self):
+        print(__version__)
         self.conn = sqlite3.connect('air.db')
         self.coursor = self.conn.cursor()
     def CreatTabels(self):
