@@ -1,5 +1,5 @@
 from datadownload import readJSON
-from DataBase import DataBase
+from DataBase import DataBasePostgreSQL
 
 def CreatAPI():
 
@@ -9,7 +9,7 @@ def CreatAPI():
     # print(data)
     listaDF = []
     api = {}
-    db = DataBase()
+    db = DataBasePostgreSQL()
     for key in data.keys():
         data_dict = data[key]
         for key, item in data_dict.items():

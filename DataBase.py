@@ -1,10 +1,11 @@
 import sqlite3
 from os import listdir
-from requests import get, __version__
-from measurementstations import MeasurementStations
+from dotenv import load_dotenv
+import os
+import psycopg2
+
 class DataBase:
     def __init__(self):
-        print(__version__)
         self.conn = sqlite3.connect('air.db')
         self.coursor = self.conn.cursor()
     def CreatTabels(self):
@@ -68,6 +69,56 @@ class DataBase:
     def Close(self):
         self.conn.close()
 
+class DataBasePostgreSQL:
+    def __init__(self):
+        load_dotenv()
+        DATABASE_URL = os.getenv('DATABASE_URL')
+        self.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        self.coursor = self.conn.cursor()
+    def SaveInTabel(self, stations: list[dict[str, str]]):
+        for station in stations:
+            city = station["city"]
+            commune = city['commune']
+            listaSave = [
+                station["id"],
+                station["addressStreet"],
+                commune['communeName'],
+                commune["districtName"],
+                commune["provinceName"],
+                city["id"],
+                city["name"],
+                station["gegrLat"],
+                station["gegrLon"],
+                station["stationName"]
+            ]
+            savetupla = tuple(listaSave)
+            listaSave.clear()
+            queue = f"INSERT INTO stations VALUES {savetupla}"
+            cur.execute(queue)
+        self.conn.commit()
+        self.coursor.close()
+    def DatabaseQueries(self, city: str):
+        ID = []
+        query = f"SELECT id FROM  stations  WHERE city_commune_communeName = '{city}'"
+        self.coursor.execute(query)
+        row = self.coursor.fetchone()
+        while row is not None:
+            print(row[0])
+            ID.append(row[0])
+            row = self.coursor.fetchone()
+        return ID
+    def DatabaseQueriesCity(self, id: int):
+        print(id)
+        ID = []
+        query = f"SELECT city_commune_communeName, addressStreet FROM  stations  WHERE id = '{id}'"
+        self.coursor.execute(query)
+        row = self.coursor.fetchone()
+        print(row[1])
+        print(row[0])
+        return f"{row[1]} {row[0]}"
+
+    def Close(self):
+        self.conn.close()
 
 if __name__ == '__main__':
     db = DataBase()

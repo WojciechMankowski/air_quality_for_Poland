@@ -1,6 +1,6 @@
 from datadownload import ConnectionAPI
 from measurementstations import MeasurementStations
-from DataBase import DataBase
+from DataBase import DataBasePostgreSQL
 
 class MeasurementStationsContextManager(MeasurementStations):
     def __init__(self):
@@ -9,13 +9,13 @@ class MeasurementStationsContextManager(MeasurementStations):
         self.ConnectionAPI()
         self.DataPreparation()
     def __exit__(self, exc_type, exc_val, exc_tb):
-        db = DataBase()
+        db = DataBasePostgreSQL()
         db.Close()
 
 
 def ContextManager(city):
     api = MeasurementStationsContextManager()
-    db = DataBase()
+    db = DataBasePostgreSQL()
     ID = db.DatabaseQueries(city=city)
     number = 0
     with api:
