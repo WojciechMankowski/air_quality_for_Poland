@@ -1,6 +1,6 @@
 import sqlite3
 from os import listdir
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 import psycopg2
 
@@ -71,7 +71,7 @@ class DataBase:
 
 class DataBasePostgreSQL:
     def __init__(self):
-        load_dotenv()
+        # load_dotenv()
         DATABASE_URL = os.getenv('DATABASE_URL')
         self.conn = psycopg2.connect(DATABASE_URL, sslmode='require')
         self.coursor = self.conn.cursor()
